@@ -13,22 +13,23 @@ function LunchCheckController($scope) {
     var message
     var dishesCount = countItems($scope.dishes);
     $scope.dishesCount = dishesCount;
-if (dishesCount > 3) { 
-    message =  "Too much!";
-} else  { 
-    message = "Enjoy!" ;
-}
+    $scope.color = "green";
 
-if ($scope.dishes == "") 
-  { message =  "Please enter data first"; } 
-
-   $scope.message = message
+    if (dishesCount > 3) { 
+        message =  "Too much!";
+    } else if  (dishesCount == 0) { 
+        message =  "Please enter data first"; 
+        $scope.color = "red";
+    } else  { 
+        message = "Enjoy!" ;
+    }
+       $scope.message = message
 
 };
 
   function countItems(string) {
     var arrayOfStrings = string.split(',');
-    var itemCount = arrayOfStrings.length;
+    var itemCount = arrayOfStrings.filter(Boolean).length;
     return itemCount;
   };
 };
