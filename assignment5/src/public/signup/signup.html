@@ -1,0 +1,86 @@
+<div class="container" ng-controller="SignupController as sign">
+
+<fieldset>
+  <legend>Sign Up for the newsletter</legend>
+  <form name='signupForm' novalidate>
+    <input type="text" name="firstname" placeholder="First Name"
+          ng-model="sign.firstname"
+          required
+          minlength="1"
+          ng-maxlength="10">
+          {{ sign.firstname }}
+          <span
+            ng-if="(signupForm.firstname.$error.minlength || signupForm.firstname.$error.required) && signupForm.firstname.$touched">
+            Firstname must be at least 1 characters long
+          </span>
+          <span ng-if="signupForm.firstname.$error.maxlength && signupForm.firstname.$touched">
+            Firstname must not be longer than 10 characters
+          </span>
+    <br>
+
+    <input type="text" name="lastname" placeholder="Last Name"
+          ng-model="sign.lastname"
+          required
+          minlength="1"
+          ng-maxlength="10">
+          {{ sign.lastname }}
+          <span
+            ng-if="(signupForm.lastname.$error.minlength || signupForm.lastname.$error.required) && signupForm.lastname.$touched">
+            Lastname must be at least 1 characters long
+          </span>
+          <span ng-if="signupForm.lastname.$error.maxlength && signupForm.lastname.$touched">
+            Lastname must not be longer than 10 characters
+          </span>
+    <br>
+
+    <input type="email" name="email" placeholder="Email handle@domain"
+      ng-model="sign.email"
+      required>
+      <span ng-if="signupForm.email.$invalid && signupForm.email.$touched">
+        Must be a valid email address: handle@domain format
+      </span>
+      <br>
+
+    <input type="text" name="phone" placeholder="Phone ###-###-####"
+      ng-model="sign.phone"
+      pattern="(\d{3})-(\d{3})-(\d{4})">
+      <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">
+        Phone must be in the format ###-###-####.
+      </span>
+      <br>
+
+    <input type="text" name="favdish" placeholder="Favourite Dish"
+          ng-model="sign.favdish"
+          required
+          minlength="2"
+          ng-maxlength="4">
+          {{ sign.favdish }}
+          <span
+            ng-if="(signupForm.favdish.$error.minlength || signupForm.favdish.$error.required) && signupForm.favdish.$touched">
+            Favdish must be at least 2 characters long
+          </span>
+          <span ng-if="signupForm.favdish.$error.maxlength && signupForm.favdish.$touched">
+            Favdish must not be longer than 4 characters
+          </span>
+    <br>
+
+    <button
+      ng-disabled="signupForm.$invalid"
+      ng-click="sign.submit()">Sign Up</button>
+
+      <div style="margin-top: 10px;">
+        Form valid? {{ signupForm.$valid }}
+      </div>
+
+  </form>
+</fieldset>
+
+    <div id="info" ng-if="sign.completed">
+      Firstname: {{ sign.firstname}} <br>
+      Lastname: {{ sign.lastname}} <br>
+      Email: {{ sign.email}} <br>
+      Phone: {{ sign.phone }} <br>
+      Favourite Dish: {{ sign.favdish }}
+    </div>
+
+</div>
