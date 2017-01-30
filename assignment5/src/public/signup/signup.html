@@ -6,30 +6,22 @@
     <input type="text" name="firstname" placeholder="First Name"
           ng-model="sign.firstname"
           required
-          minlength="1"
-          ng-maxlength="10">
-          {{ sign.firstname }}
+          >
+          <!-- {{ sign.firstname }} -->
           <span
-            ng-if="(signupForm.firstname.$error.minlength || signupForm.firstname.$error.required) && signupForm.firstname.$touched">
-            Firstname must be at least 1 characters long
-          </span>
-          <span ng-if="signupForm.firstname.$error.maxlength && signupForm.firstname.$touched">
-            Firstname must not be longer than 10 characters
+            ng-if="signupForm.firstname.$error.required && signupForm.firstname.$touched">
+            Firstname required
           </span>
     <br>
 
     <input type="text" name="lastname" placeholder="Last Name"
           ng-model="sign.lastname"
           required
-          minlength="1"
-          ng-maxlength="10">
-          {{ sign.lastname }}
+          >
+          <!-- {{ sign.lastname }} -->
           <span
-            ng-if="(signupForm.lastname.$error.minlength || signupForm.lastname.$error.required) && signupForm.lastname.$touched">
-            Lastname must be at least 1 characters long
-          </span>
-          <span ng-if="signupForm.lastname.$error.maxlength && signupForm.lastname.$touched">
-            Lastname must not be longer than 10 characters
+            ng-if="signupForm.lastname.$error.required && signupForm.lastname.$touched">
+            Lastname required
           </span>
     <br>
 
@@ -43,6 +35,7 @@
 
     <input type="text" name="phone" placeholder="Phone ###-###-####"
       ng-model="sign.phone"
+      required
       pattern="(\d{3})-(\d{3})-(\d{4})">
       <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched">
         Phone must be in the format ###-###-####.
@@ -59,8 +52,8 @@
             ng-if="(signupForm.favdish.$error.minlength || signupForm.favdish.$error.required) && signupForm.favdish.$touched">
             Favdish must be at least 2 characters long
           </span>
-          <span ng-if="signupForm.favdish.$error.maxlength && signupForm.favdish.$touched">
-            Favdish must not be longer than 4 characters
+          <span ng-if="!sign.itemFound && signupForm.favdish.$touched">
+            No such menu number exists
           </span>
     <br>
 
@@ -68,19 +61,21 @@
       ng-disabled="signupForm.$invalid"
       ng-click="sign.submit()">Sign Up</button>
 
-      <div style="margin-top: 10px;">
-        Form valid? {{ signupForm.$valid }}
-      </div>
+<!--       <div style="margin-top: 10px;">
+        Form valid? {{ signupForm.$valid }} 
+        </br>{{ signupForm.$error  }}
+      </div> -->
 
   </form>
 </fieldset>
 
-    <div id="info" ng-if="sign.completed">
-      Firstname: {{ sign.firstname}} <br>
+    <div id="info" ng-if="sign.completed && sign.itemFound">
+  <!--     Firstname: {{ sign.firstname}} <br>
       Lastname: {{ sign.lastname}} <br>
       Email: {{ sign.email}} <br>
       Phone: {{ sign.phone }} <br>
-      Favourite Dish: {{ sign.favdish }}
+      Favourite Dish: {{ sign.favdish }} --  {{ sign.itemFound}} -->
+      Your information has been saved
     </div>
 
 </div>
